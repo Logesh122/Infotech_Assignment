@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="Pages\AddStudent.razor" />
+    <Content Remove="Pages\Students.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\Students.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\AddStudent.razor" />
+    <_ContentIncludedByDefault Remove="Pages\Students.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Pages\AddStudent.razor" />
+    <None Include="Pages\Students.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\AddStudent.razor" />
+  </ItemGroup>
+
+</Project>

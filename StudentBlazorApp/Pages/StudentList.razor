@@ -1,0 +1,63 @@
+﻿@page "/students"
+@using StudentBlazorApp.Model
+@using StudentBlazorApp.Services
+@inject StudentService StudentService
+@inject NavigationManager Navigation
+
+<h3>Student List</h3>
+
+@if (students == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Phone Number</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var student in students)
+            {
+                <tr>
+                    <td>@student.Id</td>
+                    <td>@student.Name</td>
+                    <td>@student.Email</td>
+                    <td>@student.Address</td>
+                    <td>@student.PhoneNumber</td>
+                    <td>
+                        <button class="btn btn-primary" @onclick="() => EditStudent(student.Id)">Edit</button>
+                        <button class="btn btn-danger" @onclick="() => DeleteStudent(student.Id)">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Students> students;
+
+    protected override async Task OnInitializedAsync()
+    {
+        students = await StudentService.GetStudentsAsync();
+    }
+
+    private void EditStudent(Guid id)
+    {
+        Navigation.NavigateTo($"/editstudent/{id}");
+    }
+
+    private async Task DeleteStudent(Guid id)
+    {
+        await StudentService.DeleteStudentAsync(id);
+        students = await StudentService.GetStudentsAsync(); // Refresh the list
+    }
+}

@@ -1,0 +1,67 @@
+﻿@page "/students"
+@inject StudentService StudentService
+@inject NavigationManager Navigation
+@using Microsoft.AspNetCore.Components.Routing
+
+<h3>Students</h3>
+
+@if (students == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Phone Number</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var student in students)
+            {
+                <tr>
+                    <td>@student.Name</td>
+                    <td>@student.Email</td>
+                    <td>@student.Address</td>
+                    <td>@student.PhoneNumber</td>
+                    <td>
+                        <NavLink class="btn btn-primary" href="@($"edit-student/{student.Id}")">Edit</NavLink>
+                        <NavLink class="btn btn-danger" href="@($"delete-student/{student.Id}")">Delete</NavLink>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<NavLink class="btn btn-primary" href="/add-student">Add Student</NavLink>
+
+@code {
+    private IEnumerable<Student> students;
+
+    protected override async Task OnInitializedAsync()
+    {
+        students = await StudentService.GetStudents();
+    }
+
+    private void AddStudent()
+    {
+        Navigation.NavigateTo("/add-student");
+    }
+
+    private void EditStudent(Guid id)
+    {
+        Navigation.NavigateTo($"/edit-student/{id}");
+    }
+
+    private async Task DeleteStudent(Guid id)
+    {
+        await StudentService.DeleteStudent(id);
+        students = await StudentService.GetStudents();
+    }
+}

@@ -1,0 +1,54 @@
+﻿@page "/editstudent/{id:guid}"
+@using StudentBlazorApp.Model
+@using StudentBlazorApp.Services
+@inject StudentService StudentService
+@inject NavigationManager Navigation
+@code {
+    [Parameter]
+    public Guid Id { get; set; }
+
+     Students student = new Students();
+
+    protected override async Task OnInitializedAsync()
+    {
+        student = await StudentService.GetStudentByIdAsync(Id);
+    }
+
+    private async Task UpdateStudent()
+    {
+        await StudentService.UpdateStudentAsync(student);
+        Navigation.NavigateTo("/students"); // Redirect to the student list page after updating
+    }
+
+    private void CancelEdit()
+    {
+        Navigation.NavigateTo("/students");
+    }
+}
+
+<h3>Edit Student</h3>
+
+<EditForm Model="@student" OnValidSubmit="UpdateStudent">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label for="name">Name</label>
+        <InputText id="name" class="form-control" @bind-Value="student.Name" />
+    </div>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <InputText id="email" class="form-control" @bind-Value="student.Email" />
+    </div>
+    <div class="form-group">
+        <label for="address">Address</label>
+        <InputText id="address" class="form-control" @bind-Value="student.Address" />
+    </div>
+    <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <InputText id="phone" class="form-control" @bind-Value="student.PhoneNumber" />
+    </div>
+
+    <button type="submit" class="btn btn-success">Update</button>
+    <button type="button" class="btn btn-secondary" @onclick="CancelEdit">Cancel</button>
+</EditForm>

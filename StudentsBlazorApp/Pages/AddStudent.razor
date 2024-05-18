@@ -1,0 +1,41 @@
+﻿@page "/add-student"
+@inject StudentService StudentService
+@inject NavigationManager Navigation
+@using Microsoft.AspNetCore.Components.Forms
+
+
+
+<h3>Add Student</h3>
+
+<Form Model="student" OnValidSubmit="HandleValidSubmit">
+ 
+
+    <div class="form-group">
+        <label for="name">Name</label>
+        <InputText id="name" class="form-control" @bind-Value="student.Name" />
+    </div>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <InputText id="email" class="form-control" @bind-Value="student.Email" />
+    </div>
+    <div class="form-group">
+        <label for="address">Address</label>
+        <InputText id="address" class="form-control" @bind-Value="student.Address" />
+    </div>
+    <div class="form-group">
+        <label for="phoneNumber">Phone Number</label>
+        <InputText id="phoneNumber" class="form-control" @bind-Value="student.PhoneNumber" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</Form>
+
+@code {
+    private Student student = new Student();
+
+    private async Task HandleValidSubmit()
+    {
+        await StudentService.AddStudent(student);
+        Navigation.NavigateTo("/students");
+    }
+}
