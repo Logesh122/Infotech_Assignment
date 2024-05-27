@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentsDetail.Data;
 
@@ -11,9 +12,11 @@ using StudentsDetail.Data;
 namespace StudentsDetail.Migrations
 {
     [DbContext(typeof(StudentDetailsDbContext))]
-    partial class StudentDetailsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240519084704_Updated Students")]
+    partial class UpdatedStudents
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

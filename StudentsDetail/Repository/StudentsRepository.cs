@@ -46,6 +46,7 @@ namespace StudentsDetail.Repository
             existingStudents.Address = student.Address;
             existingStudents.Email = student.Email;
             existingStudents.PhoneNumber = student.PhoneNumber;
+            existingStudents.IsActive = student.IsActive;
 
             await dbContext.SaveChangesAsync();
             return existingStudents;

@@ -13,5 +13,7 @@ namespace StudentsDetail.Models
 
         [DataType(DataType.PhoneNumber)]
         public string PhoneNumber { get; set; }
+
+        public bool IsActive { get; set; }
     }
 }
