@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using StudentsDetail.Data;
 using StudentsDetail.Models;
@@ -45,7 +46,6 @@ namespace StudentsDetail.Controllers
         public async Task<IActionResult> AddStudentDetails([FromBody]Students students)
         {
             var student = await studentRepository.AddStudent(students);
-           
             return CreatedAtAction(nameof(GetStudentsById), new { id = student.Id }, student);
 
         }

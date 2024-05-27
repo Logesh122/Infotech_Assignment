@@ -19,6 +19,7 @@ builder.Services.AddScoped<HttpClient>(sp =>
     return client;
 });
 
+
 builder.Services.AddScoped<StudentService>();
 
 

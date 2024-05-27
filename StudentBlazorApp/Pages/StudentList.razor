@@ -20,6 +20,7 @@ else
                 <th>Email</th>
                 <th>Address</th>
                 <th>Phone Number</th>
+                 <th>Is Active</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -32,9 +33,10 @@ else
                     <td>@student.Email</td>
                     <td>@student.Address</td>
                     <td>@student.PhoneNumber</td>
+                    <td>@student.IsActive</td>
                     <td>
-                        <button class="btn btn-primary" @onclick="() => EditStudent(student.Id)">Edit</button>
-                        <button class="btn btn-danger" @onclick="() => DeleteStudent(student.Id)">Delete</button>
+                        <button class="btn btn-primary btn-sm" @onclick="() => EditStudent(student.Id)">Edit</button>
+                        <button class="btn btn-danger btn-sm" @onclick="() => DeleteStudent(student.Id)">Delete</button>
                     </td>
                 </tr>
             }
@@ -43,7 +45,7 @@ else
 }
 
 @code {
-    private List<Students> students;
+    private List<Students>? students;
 
     protected override async Task OnInitializedAsync()
     {

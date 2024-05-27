@@ -36,16 +36,6 @@ namespace StudentBlazorApp.Services
             await _httpClient.DeleteAsync($"api/Students/DeleteStudentDetails/{id}");
         }
 
-
-
-
-
-
-
-
-
-
-
     }
 
 }
